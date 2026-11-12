@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: booking_bp_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: booking_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d booking_dev"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  fake-gcs:
+    image: fsouza/fake-gcs-server:latest
+    container_name: booking_bp_gcs
+    restart: unless-stopped
+    ports:
+      - "4443:4443"
+    command: -scheme http -public-host localhost:4443
+    volumes:
+      - gcsdata:/data
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: booking_bp_mailpit
+    restart: unless-stopped
+    ports:
+      - "1025:1025" # SMTP port
+      - "8025:8025" # Web UI
+    environment:
+      MP_MAX_MESSAGES: 500
+
+  redis-local:
+    image: redis:7-alpine
+    container_name: booking_bp_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
+  gcsdata:
+  redisdata:
+

@@ -40,6 +40,7 @@ The complete architectural specifications, database schemas, and implementation 
 
 | Document | Purpose |
 | :--- | :--- |
+| **[explain-to-me.md](file:///home/sam/Code/main/backend-bp/booking-bp/docs/explain-to-me.md)** | Plain-English, high-level summary of what we have and how it works. |
 | **[00-OVERVIEW.md](file:///home/sam/Code/main/backend-bp/booking-bp/docs/00-OVERVIEW.md)** | Executive summary, technology matrix, and high-level system diagrams. |
 | **[01-INFRASTRUCTURE-AND-DEPLOYMENT.md](file:///home/sam/Code/main/backend-bp/booking-bp/docs/01-INFRASTRUCTURE-AND-DEPLOYMENT.md)** | Cloud Run, Cloudflare WAF, Upstash Redis, Docker, and local Docker Compose orchestration. |
 | **[02-DATABASE-AND-PRISMA-SCHEMA.md](file:///home/sam/Code/main/backend-bp/booking-bp/docs/02-DATABASE-AND-PRISMA-SCHEMA.md)** | Full Prisma schema, multi-tenant extension, and booking exclusion constraints. |
